@@ -1,6 +1,6 @@
 # RadiON
 
-FM transmitter for raspberry pi. Works on alAutomatic backup (in /backup) with one time in hour.l raspberry's ARMv8.
+FM transmitter for raspberry pi. Works on all raspberry's ARMv8.
 
 1) Connect wire (30-40 centimeters) to GPIO4 that make device work. 
 2) Run start.py with argv[1] (start/stop/restart).
