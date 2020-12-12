@@ -15,10 +15,10 @@ finally:
     import re
     import time
 
-from daemon3x import daemon
+from daemon import Daemon
 
 
-class sortD_daemon(daemon):
+class sortD_daemon(Daemon):
     def __init__(self, pidfile):
         self.pidfile = pidfile
         super().__init__(pidfile)
@@ -86,6 +86,8 @@ class sortD_daemon(daemon):
             sortD_daemon.starting_program(self)
             time.sleep(60)
 
-#pidFile6 = '/var/run/SortDdaemon.pid'
-#a = sortD_daemon(pidFile6)
-#a.run()
+# pidFile3 = '/var/run/SortDdaemon.pid'
+pidFile3 = os.path.join(os.getcwd(), '/SortDdaemon.pid')
+a = sortD_daemon(pidFile3)
+a.start()
+# a.run()

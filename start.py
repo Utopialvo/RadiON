@@ -8,8 +8,9 @@
 import time
 import sys
 import tempfile
+import os
 
-from daemon3x import daemon
+from daemon import Daemon
 from main import MyDaemon
 from sortD import sortD_daemon
 from converting import converting_daemon
@@ -17,35 +18,41 @@ from playfile import playfile_daemon
 from backup import backup_daemon
 
 
-class StartDaemon(daemon):
+class StartDaemon(Daemon):
     def run(self):
         while True:
             time.sleep(1)
 
 
 if __name__ == "__main__":
+
     pidFile = tempfile.gettempdir() + '/StartDaemon.pid'
+    # pidFile = '/var/run/StartDaemon.pid'
     one = StartDaemon(pidFile)
 
     pidFile2 = tempfile.gettempdir() + '/MainDaemon.pid'
+    # pidFile2 = '/var/run/MainDaemon.pid'
     two = MyDaemon(pidFile2)
 
     pidFile3 = tempfile.gettempdir() + '/SortDdaemon.pid'
+    # pidFile3 = '/var/run/SortDdaemon.pid'
     three = sortD_daemon(pidFile3)
 
     pidFile4 = tempfile.gettempdir() + '/ConvertingDaemon.pid'
+    # pidFile4 = '/var/run/ConvertingDaemon.pid'
     four = converting_daemon(pidFile4)
 
     pidFile5 = tempfile.gettempdir() + '/PlayFileDaemon.pid'
+    # pidFile5 = '/var/run/PlayFileDaemon.pid'
     five = playfile_daemon(pidFile5)
 
     pidFile6 = tempfile.gettempdir() + '/BackupDaemon.pid'
+    # pidFile6 = '/var/run/SortDdaemon.pid'
     six = backup_daemon(pidFile6)
-
 
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
-            one.start()
+            # one.start()
             two.start()
             three.start()
             four.start()

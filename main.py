@@ -11,10 +11,12 @@ except ImportError:
     import ConfigParser as configparser
 
 import os
+import time
 
-from daemon3x import daemon
+from daemon import Daemon
 
-class MyDaemon(daemon):
+
+class MyDaemon(Daemon):
     def __init__(self, pidfile):
         self.pidfile = pidfile
         super().__init__(pidfile)
@@ -111,10 +113,14 @@ class MyDaemon(daemon):
         return None
 
     def run(self):
-            print("main ran")
-            MyDaemon.starting_program(self)
+        print("main ran")
+        MyDaemon.starting_program(self)
+        while True:
+            time.sleep(1)
 
 
-#pidFile2 = '/var/run/MainDaemon.pid'
-#a = MyDaemon(pidFile2)
-#a.run()
+# pidFile2 = '/var/run/MainDaemon.pid'
+pidFile2 = os.path.join(os.getcwd(),'/MainDaemon.pid')
+a = MyDaemon(pidFile2)
+a.start()
+# a.run()

@@ -16,10 +16,10 @@ finally:
     import subprocess
     import time
 
-from daemon3x import daemon
+from daemon import Daemon
 
 
-class converting_daemon(daemon):
+class converting_daemon(Daemon):
     def __init__(self, pidfile):
         self.pidfile = pidfile
         super().__init__(pidfile)
@@ -87,7 +87,7 @@ class converting_daemon(daemon):
             converting_daemon.starting_program(self)
             time.sleep(60)
 
-
-#pidFile4 = '/var/run/ConvertingDaemon.pid'
-#a = converting_daemon(pidFile4)
-#a.run()
+# pidFile4 = '/var/run/ConvertingDaemon.pid'
+pidFile4 = os.path.join(os.getcwd(), '/ConvertingDaemon.pid')
+a = converting_daemon(pidFile4)
+a.start()

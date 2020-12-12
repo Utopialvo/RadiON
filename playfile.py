@@ -17,10 +17,10 @@ finally:
     import time
     import subprocess
 
-from daemon3x import daemon
+from daemon import Daemon
 
 
-class playfile_daemon(daemon):
+class playfile_daemon(Daemon):
     def __init__(self, pidfile):
         self.pidfile = pidfile
         super().__init__(pidfile)
@@ -108,7 +108,8 @@ class playfile_daemon(daemon):
             playfile_daemon.starting_program(self)
             time.sleep(60)
 
-
-#pidFile5 = '/var/run/PlayFileDaemon.pid'
-#a = playfile_daemon(pidFile5)
-#a.run()
+# pidFile5 = '/var/run/PlayFileDaemon.pid'
+pidFile5 = os.path.join(os.getcwd(), '/PlayFileDaemon.pid')
+a = playfile_daemon(pidFile5)
+a.start()
+# a.run()

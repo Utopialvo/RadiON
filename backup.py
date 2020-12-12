@@ -14,10 +14,10 @@ finally:
     import os
     import time
 
-from daemon3x import daemon
+from daemon import Daemon
 
 
-class backup_daemon(daemon):
+class backup_daemon(Daemon):
     def __init__(self, pidfile):
         self.pidfile = pidfile
         super().__init__(pidfile)
@@ -92,6 +92,8 @@ class backup_daemon(daemon):
         while True:
             backup_daemon.starting_program(self)
 
-#pidFile3 = '/var/run/BackupDaemon.pid'
-#a = backup_daemon(pidFile3)
-#a.run()
+# pidFile3 = '/var/run/BackupDaemon.pid'
+pidFile3 = os.path.join(os.getcwd(), '/BackupDaemon.pid')
+a = backup_daemon(pidFile3)
+a.start()
+# a.run()
