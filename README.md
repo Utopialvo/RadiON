@@ -10,6 +10,8 @@ FM transmitter for raspberry pi. Works on all raspberry's ARMv8.
 
 Class for daemonizing is https://github.com/serverdensity/python-daemon
 
+sudo apt-get install sox
+
 git clone https://github.com/Utopialvo/RadiON
 
 cd RadiON/
