@@ -107,7 +107,7 @@ class playfile_daemon(Daemon):
     def run(self):
         while True:
             playfile_daemon.starting_program(self)
-            time.sleep(60)
+            time.sleep(5)
 
 
 if __name__ == "__main__":
