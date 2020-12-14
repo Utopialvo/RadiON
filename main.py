@@ -12,6 +12,7 @@ except ImportError:
 
 import os
 import time
+import sys
 
 from daemon import Daemon
 
@@ -113,14 +114,25 @@ class MyDaemon(Daemon):
         return None
 
     def run(self):
-        print("main ran")
         MyDaemon.starting_program(self)
         while True:
             time.sleep(1)
 
+if __name__ == "__main__":
+    pidFile2 = os.path.join(os.getcwd(), 'MainDaemon.pid')
+    a = MyDaemon(pidFile2)
+    if len(sys.argv) == 2:
+        if 'start' == sys.argv[1]:
+            a.start()
+        elif 'stop' == sys.argv[1]:
+            a.stop()
+        elif 'restart' == sys.argv[1]:
+            a.restart()
+        else:
+            print("Unknown command")
+            sys.exit(2)
+        sys.exit(0)
+    else:
+        print("usage: %s start|stop|restart" % sys.argv[0])
+        sys.exit(2)
 
-# pidFile2 = '/var/run/MainDaemon.pid'
-pidFile2 = os.path.join(os.getcwd(),'/MainDaemon.pid')
-a = MyDaemon(pidFile2)
-a.start()
-# a.run()

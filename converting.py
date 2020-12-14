@@ -15,6 +15,7 @@ finally:
     import re
     import subprocess
     import time
+    import sys
 
 from daemon import Daemon
 
@@ -87,7 +88,23 @@ class converting_daemon(Daemon):
             converting_daemon.starting_program(self)
             time.sleep(60)
 
-# pidFile4 = '/var/run/ConvertingDaemon.pid'
-pidFile4 = os.path.join(os.getcwd(), '/ConvertingDaemon.pid')
-a = converting_daemon(pidFile4)
-a.start()
+
+
+
+if __name__ == "__main__":
+    pidFile4 = os.path.join(os.getcwd(), 'ConvertingDaemon.pid')
+    a = converting_daemon(pidFile4)
+    if len(sys.argv) == 2:
+        if 'start' == sys.argv[1]:
+            a.start()
+        elif 'stop' == sys.argv[1]:
+            a.stop()
+        elif 'restart' == sys.argv[1]:
+            a.restart()
+        else:
+            print("Unknown command")
+            sys.exit(2)
+        sys.exit(0)
+    else:
+        print("usage: %s start|stop|restart" % sys.argv[0])
+        sys.exit(2)
