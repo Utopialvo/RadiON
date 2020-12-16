@@ -58,7 +58,7 @@ class converting_daemon(Daemon):
     def convertingfiles(self):
         for root, folders, files in os.walk(self.convert_dir):
             for filename in files:
-                if re.search(".(aac|mp3|m4a|ogg|ac3)$", filename) is not None:
+                if re.search(".(mp2|mp3|ogg)$", filename) is not None:
                     file_music = filename[0:-3]
                     command = "sox " + (root + filename) + " -r 192000 " + (
                         "-c 2" if self.play_stereo else "-c 1") + " -b 16 -t wav " + (root + file_music) + "wav"
